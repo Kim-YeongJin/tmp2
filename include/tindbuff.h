@@ -6,7 +6,6 @@
 #include "fixfld.h"
 //#include "fixlen.h"
 #include "Student.h"
-#include "CourseRegistration.h"
 
 // class TextIndexBuffer supports reading and writing index records from
 //	class TextIndex

@@ -8,7 +8,6 @@
 #include "fixfld.h"
 #include "length.h"
 #include "Student.h"
-#include "CourseRegistration.h"
 #include "buffile.h"
 #include "recfile.h"
 #include "recfile.cpp"  // for template
@@ -17,164 +16,61 @@
 #include "btree.h"
 #include "./btindex/btree.cpp"   // for template method body
 
-Student student[20];
-CourseRegistration course[20];
+Student * st[50];
 const int BTreeSize = 5;
 
-void getTime(char* t){
-    t[0] = '\0';
-    time_t curr_time;
-    struct tm *curr_tm;
-    curr_time = time(NULL);
-    curr_tm = localtime(&curr_time);
-    strftime(t, 80, "%Y-%m-%d-%H:%M:%S", curr_tm);
-}
-
-void InitStudent()
+void st_record()
 {
-    cout << "Initializing 20 Students"<<endl;
-    char enrollDate[80];
-    int recaddr;
-
-    student[0].setStudentID("201424528");
-    student[0].setName("JSG");
-    student[0].setAddress("Address 1");
-    getTime(enrollDate);
-    student[0].setEnrollDate(enrollDate);
-    student[0].setCreditHour("117");
-
-    student[1].setStudentID("201430492");
-    student[1].setName("Student 2");
-    student[1].setAddress("Address 2");
-    getTime(enrollDate);
-    student[1].setEnrollDate(enrollDate);
-    student[1].setCreditHour("107");
-
-    student[2].setStudentID("201530192");
-    student[2].setName("Student 3");
-    student[2].setAddress("Address 3");
-    getTime(enrollDate);
-    student[2].setEnrollDate(enrollDate);
-    student[2].setCreditHour("89");
-
-    student[3].setStudentID("201540098");
-    student[3].setName("Student 4");
-    student[3].setAddress("Address 4");
-    getTime(enrollDate);
-    student[3].setEnrollDate(enrollDate);
-    student[3].setCreditHour("79");
-
-    student[4].setStudentID("201629018");
-    student[4].setName("Student 5");
-    student[4].setAddress("Address 5");
-    getTime(enrollDate);
-    student[4].setEnrollDate(enrollDate);
-    student[4].setCreditHour("70");
-
-    student[5].setStudentID("201617789");
-    student[5].setName("Student 6");
-    student[5].setAddress("Address 6");
-    getTime(enrollDate);
-    student[5].setEnrollDate(enrollDate);
-    student[5].setCreditHour("68");
-
-    student[6].setStudentID("201723659");
-    student[6].setName("Student 7");
-    student[6].setAddress("Address 7");
-    getTime(enrollDate);
-    student[6].setEnrollDate(enrollDate);
-    student[6].setCreditHour("60");
-
-    student[7].setStudentID("201820417");
-    student[7].setName("Student 8");
-    student[7].setAddress("Address 8");
-    getTime(enrollDate);
-    student[7].setEnrollDate(enrollDate);
-    student[7].setCreditHour("58");
-
-    student[8].setStudentID("201860098");
-    student[8].setName("Student 9");
-    student[8].setAddress("Address 9");
-    getTime(enrollDate);
-    student[8].setEnrollDate(enrollDate);
-    student[8].setCreditHour("30");
-
-    student[9].setStudentID("201945532");
-    student[9].setName("Student 10");
-    student[9].setAddress("Address 10");
-    getTime(enrollDate);
-    student[9].setEnrollDate(enrollDate);
-    student[9].setCreditHour("41");
-
-    student[10].setStudentID("201354863");
-    student[10].setName("Student 11");
-    student[10].setAddress("Address 11");
-    getTime(enrollDate);
-    student[10].setEnrollDate(enrollDate);
-    student[10].setCreditHour("121");
-
-    student[11].setStudentID("201548201");
-    student[11].setName("Student 12");
-    student[11].setAddress("Address 12");
-    getTime(enrollDate);
-    student[11].setEnrollDate(enrollDate);
-    student[11].setCreditHour("97");
-
-    student[12].setStudentID("201435486");
-    student[12].setName("Student 13");
-    student[12].setAddress("Address 13");
-    getTime(enrollDate);
-    student[12].setEnrollDate(enrollDate);
-    student[12].setCreditHour("110");
-
-    student[13].setStudentID("201540098");
-    student[13].setName("Student 14");
-    student[13].setAddress("Address 14");
-    getTime(enrollDate);
-    student[13].setEnrollDate(enrollDate);
-    student[13].setCreditHour("79");
-
-    student[14].setStudentID("201916883");
-    student[14].setName("Student 15");
-    student[14].setAddress("Address 15");
-    getTime(enrollDate);
-    student[14].setEnrollDate(enrollDate);
-    student[14].setCreditHour("69");
-
-    student[15].setStudentID("201768831");
-    student[15].setName("Student 16");
-    student[15].setAddress("Address 16");
-    getTime(enrollDate);
-    student[15].setEnrollDate(enrollDate);
-    student[15].setCreditHour("56");
-
-    student[16].setStudentID("201864731");
-    student[16].setName("Student 17");
-    student[16].setAddress("Address 17");
-    getTime(enrollDate);
-    student[16].setEnrollDate(enrollDate);
-    student[16].setCreditHour("45");
-
-    student[17].setStudentID("201215432");
-    student[17].setName("Student 18");
-    student[17].setAddress("Address 18");
-    getTime(enrollDate);
-    student[17].setEnrollDate(enrollDate);
-    student[17].setCreditHour("116");
-
-    student[18].setStudentID("202046883");
-    student[18].setName("Student 19");
-    student[18].setAddress("Address 19");
-    getTime(enrollDate);
-    student[18].setEnrollDate(enrollDate);
-    student[18].setCreditHour("18");
-
-    student[19].setStudentID("201728405");
-    student[19].setName("Student 20");
-    student[19].setAddress("Address 20");
-    getTime(enrollDate);
-    student[19].setEnrollDate(enrollDate);
-    student[19].setCreditHour("49");
+        st[0] = new Student ("0", "st1", "Seoul", "2014", "30");
+        st[1] = new Student ("1", "st2", "Seoul", "2014", "30");
+        st[2] = new Student ("2", "st3", "Seoul", "2014", "30");
+        st[3] = new Student ("3", "st4", "Seoul", "2014", "30");
+        st[4] = new Student ("4", "st5", "Seoul", "2014", "30");
+        st[5] = new Student ("5", "st6", "Seoul", "2014", "30");
+        st[6] = new Student ("6", "st7", "Seoul", "2014", "30");
+        st[7] = new Student ("7", "st8", "Seoul", "2014", "30");
+        st[8] = new Student ("8", "st9", "Seoul", "2014", "30");
+        st[9] = new Student ("9", "st10", "Seoul", "2014", "30");
+        st[10] = new Student ("10", "st11", "Busan", "2014", "30");
+        st[11] = new Student ("11", "st12", "Busan", "2014", "30");
+        st[12] = new Student ("12", "st13", "Busan", "2014", "30");
+        st[13] = new Student ("13", "st14", "Busan", "2014", "30");
+        st[14] = new Student ("14", "st15", "Busan", "2014", "30");
+        st[15] = new Student ("15", "st16", "Busan", "2014", "30");
+        st[16] = new Student ("16", "st17", "Busan", "2014", "30");
+        st[17] = new Student ("17", "st18", "Busan", "2014", "30");
+        st[18] = new Student ("18", "st19", "Busan", "2014", "30");
+        st[19] = new Student ("19", "st20", "Busan", "2014", "30");
+        st[20] = new Student ("20", "st1", "Seoul", "2014", "30");
+        st[21] = new Student ("21", "st2", "Seoul", "2014", "30");
+        st[22] = new Student ("22", "st3", "Seoul", "2014", "30");
+        st[23] = new Student ("23", "st4", "Seoul", "2014", "30");
+        st[24] = new Student ("24", "st5", "Seoul", "2014", "30");
+        st[25] = new Student ("25", "st6", "Seoul", "2014", "30");
+        st[26] = new Student ("26", "st7", "Seoul", "2014", "30");
+        st[27] = new Student ("27", "st8", "Seoul", "2014", "30");
+        st[28] = new Student ("28", "st9", "Seoul", "2014", "30");
+        st[29] = new Student ("29", "st10", "Seoul", "2014", "30");
+	st[30] = new Student ("30", "st11", "Busan", "2014", "30");
+        st[31] = new Student ("31", "st12", "Busan", "2014", "30");
+        st[32] = new Student ("32", "st13", "Busan", "2014", "30");
+        st[33] = new Student ("33", "st14", "Busan", "2014", "30");
+        st[34] = new Student ("34", "st15", "Busan", "2014", "30");
+        st[35] = new Student ("35", "st16", "Busan", "2014", "30");
+        st[36] = new Student ("36", "st17", "Busan", "2014", "30");
+        st[37] = new Student ("37", "st18", "Busan", "2014", "30");
+        st[38] = new Student ("38", "st19", "Busan", "2014", "30");
+        st[39] = new Student ("39", "st20", "Busan", "2014", "30");
+        st[40] = new Student ("40", "st11", "Busan", "2014", "30");
+        st[41] = new Student ("41", "st12", "Busan", "2014", "30");
+        st[42] = new Student ("42", "st13", "Busan", "2014", "30");
+        st[43] = new Student ("43", "st14", "Busan", "2014", "30");
+        st[44] = new Student ("44", "st15", "Busan", "2014", "30");
+        st[45] = new Student ("45", "st16", "Busan", "2014", "30");
+        st[46] = new Student ("46", "st17", "Busan", "2014", "30");
+        st[47] = new Student ("47", "st18", "Busan", "2014", "30");
+        st[48] = new Student ("48", "st19", "Busan", "2014", "30");
+        st[49] = new Student ("49", "st20", "Busan", "2014", "30");
 
 }
 
@@ -184,25 +80,25 @@ int main(int argc, char ** argv)
 
 	int result, i;
 	BTree <char *> bt (BTreeSize);
-	result = bt.Create ("student.dat",ios::in|ios::out);
+	result = bt.Create ("st.dat",ios::in|ios::out);
 	if (!result){cout<<"Please delete student.dat"<<endl;return 0;}
 
-	InitStudent();
+	st_record();
 
-	for (i = 0; i<20; i++)
+	for (i = 0; i<50; i++)
 	{
-		cout<<"Inserting "<<student[i].getStudentID()<<endl;
-		result = bt.Insert(student[i].getStudentID(),i);
+		cout<<"Inserting "<<st[i]->getStudentID()<<endl;
+		result = bt.Insert(st[i]->getStudentID(),i);
 		cout << result << endl;
 		bt.Print(cout);
 	}
 
-	cout << bt.Search("201424528") << endl;
+	cout << bt.Search("0") << endl;
 	// Delete Test
-	for (i = 0; i<20; i++)
+	for (i = 0; i<50; i++)
 	{
-		cout<<"Deleting "<<student[i].getStudentID()<<endl;
-		result = bt.Remove(student[i].getStudentID(),i);
+		cout<<"Deleting "<<st[i]->getStudentID()<<endl;
+		result = bt.Remove(st[i]->getStudentID(),i);
 		cout << result << endl;
 	}
 

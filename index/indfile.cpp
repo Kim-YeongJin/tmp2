@@ -169,4 +169,3 @@ TextIndexedFile<RecType>::~TextIndexedFile ()
 
 // for template separate compile
 template class TextIndexedFile<Student>;
-template class TextIndexedFile<CourseRegistration>;

@@ -3,7 +3,7 @@ CFLAGS= -Wall
 OBJS = BTreeTest.o
 INCDIR=./include
 LIBDIR=./lib
-DIRS = buf fixed var recfile index student courseregistration btindex
+DIRS = buf fixed var recfile index student btindex
 
 .PHONY: all clean
 
@@ -16,7 +16,7 @@ BTreeTest: $(OBJS)
 	do \
 		$(MAKE) -C $$d; \
 	done
-	$(CC) -o BTreeTest $(OBJS) -L$(LIBDIR) -lmybtree -lmybuffer -lmyfixed -lmystudent -lmycourse -lmyvar -lrecfile -lmyindex 
+	$(CC) -o BTreeTest $(OBJS) -L$(LIBDIR) -lmybtree -lmybuffer -lmyfixed -lmystudent -lmyvar -lrecfile -lmyindex 
 	export LD_LIBRARY_PATH=$(LIBDIR)
 
 clean:

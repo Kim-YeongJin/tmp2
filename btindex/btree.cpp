@@ -106,11 +106,12 @@ int BTree<keyType>::Insert (const keyType key, const int recAddr)
 	if (level >= 0) return 1;// insert complete
 	// else we just split the root
 	int newAddr = BTreeFile.Append(Root); // put previous root into file
+	int newAddr2 = BTreeFile.Append(* newNode);
 	// insert 2 keys in new root node
 	Root.Keys[0]=thisNode->LargestKey();
 	Root.RecAddrs[0]=newAddr;
 	Root.Keys[1]=newNode->LargestKey();
-	Root.RecAddrs[1]=newNode->RecAddr;
+	Root.RecAddrs[1]=newAddr2;
 	Root.NumKeys=2; 
 	Height++;
 	return 1;	
